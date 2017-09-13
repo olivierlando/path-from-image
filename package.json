@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "jpeg-js": "^0.3.3",
-    "node-dijkstra": "^2.5.0"
+    "node-dijkstra": "^2.5.0",
+    "zhang-suen": "0.0.3"
   }
 }

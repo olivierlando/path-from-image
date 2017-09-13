@@ -1,6 +1,6 @@
+const zhangSuen = require('zhang-suen');
 const pixelsColorFilter = require('./PixelsColorFilter');
 const bitsArrayToJpeg = require('./BitsArrayToJpeg');
-const zhangSuen = require('./ZhangSuen');
 const lightenPixelsCount = require('./LightenPixelsCount');
 const generateGraph = require('./GenerateGraph');
 const Utils = require('./Utils');
