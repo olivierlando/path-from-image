@@ -1,11 +1,12 @@
 const zhangSuen = require('zhang-suen');
+const path = require('path');
+
 const pixelsColorFilter = require('./PixelsColorFilter');
 const bitsArrayToJpeg = require('./BitsArrayToJpeg');
 const lightenPixelsCount = require('./LightenPixelsCount');
 const generateGraph = require('./GenerateGraph');
 const Utils = require('./Utils');
 const douglasPeucker = require('./DouglasPeucker');
-const path = require('path');
 
 class PathFromImage {
   constructor(params) {
@@ -47,9 +48,8 @@ class PathFromImage {
     );
   }
 
-  static coordinatesFromNodeName(name) {
-    const splittedName = name.split('_');
-    return [parseInt(splittedName[0], 10), parseInt(splittedName[1], 10)];
+  static coordinatesFromNodeName(name, height) {
+    return [parseInt(name / height, 10), name % height];
   }
 
   findClosestPoint(x, y) {
@@ -63,7 +63,7 @@ class PathFromImage {
     this.graph.graph.forEach((_, nodeName) => {
       const distance = Utils.getSquareDistance(
         [x, y],
-        PathFromImage.coordinatesFromNodeName(nodeName),
+        PathFromImage.coordinatesFromNodeName(nodeName, this.params.height),
       );
       if (distance < bestDistance) {
         bestDistance = distance;
@@ -80,10 +80,17 @@ class PathFromImage {
       return null;
     }
 
-    const pathCoordinates = fullPath.map(name => PathFromImage.coordinatesFromNodeName(name));
+    const pathCoordinates = fullPath.map(name =>
+      PathFromImage.coordinatesFromNodeName(name, this.params.height));
 
     if (this.params.debugJpeg) {
-      bitsArrayToJpeg(path.join(this.params.debugJpeg, '3-fullPath.jpg'), this.bitsArray, this.params.width, this.params.height, pathCoordinates);
+      bitsArrayToJpeg(
+        path.join(this.params.debugJpeg, '3-fullPath.jpg'),
+        this.bitsArray,
+        this.params.width,
+        this.params.height,
+        pathCoordinates,
+      );
     }
 
     const simplified = douglasPeucker(
