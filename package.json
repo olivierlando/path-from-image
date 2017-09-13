@@ -1,6 +1,6 @@
 {
   "name": "path-from-image",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Try to find the shortest path between two points of an image, following pixels matching a given colors pattern. Usefull to find the shortest path between two locations on a map, by following roads.",
   "main": "dist/PathFromImage.js",
   "scripts": {
@@ -41,6 +41,6 @@
   "dependencies": {
     "jpeg-js": "^0.3.3",
     "node-dijkstra": "^2.5.0",
-    "zhang-suen": "0.0.3"
+    "zhang-suen": "0.0.4"
   }
 }
