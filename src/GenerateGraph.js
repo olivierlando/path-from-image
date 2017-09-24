@@ -11,7 +11,7 @@ const anglesDistance = (alpha, beta) => {
 
 const generateGraph = (data, width, height, exponent) => {
   const minDist = 2;
-  const maxDist = 50;
+  const maxDist = 40;
   const simpleGraph = {};
 
   const getPointName = (x, y) => (x * height) + y;

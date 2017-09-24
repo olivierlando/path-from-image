@@ -13,9 +13,16 @@ const patternsMatch = (patterns, r, g, b) =>
 
 const pixelsColorFilter = (patterns, pixels) => {
   const result = new Uint8Array(pixels.length / 4);
-  for (let i = 0; i < pixels.length; i += 4) {
-    result[i / 4] =
-      patternsMatch(patterns, pixels[i], pixels[i + 1], pixels[i + 2]) ? 1 : 0;
+  if (typeof patterns === 'function') {
+    for (let i = 0; i < pixels.length; i += 4) {
+      result[i / 4] =
+        patterns(pixels[i], pixels[i + 1], pixels[i + 2]) ? 1 : 0;
+    }
+  } else {
+    for (let i = 0; i < pixels.length; i += 4) {
+      result[i / 4] =
+        patternsMatch(patterns, pixels[i], pixels[i + 1], pixels[i + 2]) ? 1 : 0;
+    }
   }
   return result;
 };
